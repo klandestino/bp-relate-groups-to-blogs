@@ -16,6 +16,8 @@ Network: true
 define( 'BP_RELATE_GROUPS_TO_BLOGS_IS_INSTALLED', 1 );
 define( 'BP_RELATE_GROUPS_TO_BLOGS_VERSION', '0.9' );
 define( 'BP_RELATE_GROUPS_TO_BLOGS_PLUGIN_DIR', dirname( __FILE__ ) );
+define( 'BP_RELATE_GROUPS_TO_BLOGS_PLUGIN_URL', plugin_dir_url() . substr( dirname( __FILE__ ), strrpos( dirname( __FILE__ ), '/' ) + 1 ) );
+define( 'BP_RELATE_GROUPS_TO_BLOGS_TEMPLATE_DIR', dirname( __FILE__ ) . '/templates' );
 
 function bp_relate_groups_to_blogs_init() {
 	if( version_compare( BP_VERSION, '1.3', '>' ) ) {
