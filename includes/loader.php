@@ -24,10 +24,33 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	public $slug = 'relate-groups-to-blogs';
 
 	/**
+	 * If this plugin is visible for non-group members
+	 */
+	public $visible = true;
+
+	/**
+	 * If this plugin is available in the creation process
+	 */
+	public $enable_create_step = true;
+
+	/**
+	 * If this plugin is available in the edit form
+	 */
+	public $enable_edit_item = true;
+
+	/**
 	 * Where this plugin will render it's forms in the creation process
 	 */
 	public $create_step_position = 51;
 
+	/**
+	 * Where this plugin will render it's edit form
+	 */
+	public $edit_step_position = 51;
+
+	/**
+	 * Where this plugin will render it's content in the group
+	 */
 	public $nav_item_position = 51;
 
 	/**
@@ -77,9 +100,44 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	 * @return array
 	 */
 	public function get_blogs( $group_id = 0 ) {
-		if( ! $group_id ) {
-			global $bp;
+		global $bp;
+
+		if( empty( $group_id ) ) {
 			$group_id = $bp->groups->current_group->id;
+		}
+
+		$blogs_id = groups_get_groupmeta( 'bp-relate-groups-to-blogs', $group_id );
+
+		if( ! empty( $blogs_id ) ) {
+			if( ! is_array( $blogs_id ) ) {
+				$blogs_id = array( $blogs_id );
+			}
+		}
+
+		return BP_Relate_Groups_to_Blogs_Ajax::get_blogs( $blogs_id, false );
+	}
+
+	/**
+	 * Save related blogs by group
+	 * @param group_id int optional, default is current group
+	 * @param blogs_id int|array optional, default is null and will erase all relationsships
+	 * @return void
+	 */
+	public function set_blogs( $group_id = 0, $blogs_id = 0 ) {
+		global $bp;
+
+		if( empty( $group_id ) ) {
+			$group_id = $bp->groups->current_group->id;
+		}
+
+		if( empty( $blogs_id ) ) {
+			groups_delete_groupmeta( $group_id, 'bp-relate-groups-to-blogs' );
+		} else {
+			if( ! is_array( $blogs_id ) ) {
+				$blogs_id = array( $blogs_id );
+			}
+
+			groups_update_groupmeta( $group_id, 'bp-relate-groups-to-blogs', $blogs_id );
 		}
 	}
 
@@ -98,6 +156,20 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	}
 
 	/**
+	 * Receives the posted create-form
+	 * @see create_screen
+	 * @return void
+	 */
+	public function create_screen_save() {
+		check_admin_referer( 'groups_create_save_' . $this->slug );
+
+		if( array_key_exists( 'group_blog_blogs', $_POST ) ) {
+			global $bp;
+			$this->set_blogs( $bp->groups->new_group_id, $_POST[ 'group_blog_blogs' ] );
+		}
+	}
+
+	/**
 	 * Displays a edit-form.
 	 * Function executed when groups is about to be edited.
 	 * @return void
@@ -109,7 +181,40 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 
 		global $bp;
 		$this->get_template( 'bp-relate-groups-to-blogs-edit', $bp->groups->current_group->slug );
-		wp_nonce_field( 'groups_create_save_' . $this->slug );
+		?><p><input type="submit" value="<?php _e( 'Save Changes', 'bcg' ) ?> &rarr;" id="save" name="save" /></p><?php
+		wp_nonce_field( 'groups_edit_save_' . $this->slug );
+	}
+
+	/**
+	 * Receives the posted edit-form
+	 * @see edit_screen
+	 * @return void
+	 */
+	public function edit_screen_save() {
+		global $bp;
+
+		if( array_key_exists( 'save', $_POST ) ) {
+			return false;
+		}
+
+		check_admin_referer( 'groups_edit_save_' . $this->slug );
+
+		if( array_key_exists( 'group_blog_blogs', $_POST ) ) {
+			$this->set_blogs( $bp->groups->current_group->id, $_POST[ 'group_blog_blogs' ] );
+			bp_core_add_message( __( 'Group Blog Categories settings were successfully updated.', 'bcg' ) );
+		} else {
+			bp_core_add_message( __( 'There was an error updating Group Blog Categories settings, please try again.', 'bcg' ), 'error' );
+		}
+
+		bp_core_redirect( bp_get_group_permalink( $bp->groups->current_group ) . '/admin/' . $this->slug );
+	}
+
+	/**
+	 * Displays the related blogs in this plugin tab
+	 */
+	public function display() {
+		global $bp;
+		$this->get_template( 'bp-relate-groups-to-blogs-display', $bp->groups->current_group->slug );
 	}
 
 }
@@ -123,17 +228,20 @@ class BP_Relate_Groups_to_Blogs_Ajax {
 	 * Makes wordpress load scripts and styles
 	 * @return void
 	 */
-	public function enqueue_scripts() {
+	static public function enqueue_scripts() {
 		wp_enqueue_script( 'bp-relate-groups-to-blogs', BP_RELATE_GROUPS_TO_BLOGS_PLUGIN_URL . '/js/bp-relate-groups-to-blogs.js', array( 'jquery' ) );
 		wp_enqueue_style( 'bp-relate-groups-to-blogs', BP_RELATE_GROUPS_TO_BLOGS_PLUGIN_URL . '/css/bp-relate-groups-to-blogs.css' );
 	}
 
 	/**
 	 * Searches for blogs by name
-	 * @return array
+	 * @param query string|int|array optional, search string or int or array with blog id's. Using $_POST[ query ] if empty
+	 * @param print_json boolean optional, if set to true, result will be printed as json and exit
+	 * @return array|void
 	 */
-	public function get_blogs( $query = '' ) {
+	static public function get_blogs( $query = '', $print_json = true ) {
 		global $wpdb;
+		$query = array();
 		$blogs = array();
 		$current_blog_id = $wpdb->blogid;
 
@@ -141,11 +249,23 @@ class BP_Relate_Groups_to_Blogs_Ajax {
 			$query = $_POST[ 'query' ];
 		}
 
-		$query = $wpdb->get_results( sprintf(
-			'SELECT `blog_id`, `domain` FROM `%s` WHERE `domain` LIKE "%%%s%%" AND `public` = "1" AND `archived` = "0"',
-			mysql_real_escape_string( $wpdb->blogs ),
-			mysql_real_escape_string( $query )
-		), ARRAY_A );
+		if( is_numeric( $query ) ) {
+			$query = array( $query );
+		}
+
+		if( is_array( $query ) ) {
+			$query = $wpdb->get_results( sprintf(
+				'SELECT `blog_id`, `domain` FROM `%s` WHERE `blog_id` IN ( "%s" ) AND `public` = "1" AND `archived` = "0"',
+				mysql_real_escape_string( $wpdb->blogs ),
+				mysql_real_escape_string( implode( '","', $query ) )
+			), ARRAY_A );
+		} elseif( ! empty( $query ) ) {
+			$query = $wpdb->get_results( sprintf(
+				'SELECT `blog_id`, `domain` FROM `%s` WHERE `domain` LIKE "%%%s%%" AND `public` = "1" AND `archived` = "0"',
+				mysql_real_escape_string( $wpdb->blogs ),
+				mysql_real_escape_string( $query )
+			), ARRAY_A );
+		}
 
 		foreach( $query as $blog ) {
 			$wpdb->set_blog_id( $blog[ 'blog_id' ] );
@@ -156,17 +276,21 @@ class BP_Relate_Groups_to_Blogs_Ajax {
 			), ARRAY_A );
 
 			foreach( $subquery as $opt ) {
-				$blog[ $opt[ 'option_name' ] ] = $opt[ 'option_value' ];
+				$blog[ $opt[ 'option_name' ] ] = esc_attr( $opt[ 'option_value' ] );
 			}
 
 			$blogs[] = $blog;
 		}
 
 		$wpdb->set_blog_id( $current_blog_id );
-		echo json_encode( $blogs );
 
-		// Exit when done and before wordpress or something else prints a zero.
-		exit;
+		if( $print_json ) {
+			echo json_encode( $blogs );
+			// Exit when done and before wordpress or something else prints a zero.
+			exit;
+		} else {
+			return $blogs;
+		}
 	}
 
 }

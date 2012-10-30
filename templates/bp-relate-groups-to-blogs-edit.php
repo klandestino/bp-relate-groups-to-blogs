@@ -13,10 +13,22 @@
 		— <a href="%siteurl" title="%blogname"><?php _e( 'View blog', 'bp-relate-groups-to-blogs' ); ?></a>
 	</li>
 	<?php foreach( $bp_relate_groups_to_blogs->get_blogs() as $blog ) : ?>
-		<li id="group-blog-<?php echo esc_attr( $blog->id ); ?>">
-			<input id="group-blog-id-<?php echo esc_attr( $blog->id ); ?>" name="group-blog-blogs[]" type="checkbox" value="<?php echo esc_attr( $blog->id ); ?>" checked="checked" />
-			<?php $blog->name; ?>
+		<li id="group-blog-<?php echo esc_attr( $blog[ 'blog_id' ] ); ?>">
+			<input
+				id="group-blog-id-<?php echo esc_attr( $blog[ 'blog_id' ] ); ?>"
+				name="group-blog-blogs[]"
+				type="checkbox"
+				value="<?php echo esc_attr( $blog[ 'blog_id' ] ); ?>"
+				checked="checked"
+			/>
+			<label for="group-blog-<?php echo esc_attr( $blog[ 'blog_id' ] ); ?>">
+				<?php echo esc_attr( $blog[ 'blogname' ] ); ?>
+				— <em><?php echo esc_attr( $blog[ 'blogdescription' ] ); ?></em>
+			</label>
+			— <a
+				href="<?php echo esc_attr( $blog[ 'siteurl' ] ); ?>"
+				title="<?php echo esc_attr( $blog[ 'blogname' ] ); ?>"
+			><?php _e( 'View blog', 'bp-relate-groups-to-blogs' ); ?></a>
 		</li>
 	<?php endforeach; ?>
 </ul>
-
