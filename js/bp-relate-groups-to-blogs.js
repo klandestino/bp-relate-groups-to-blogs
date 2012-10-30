@@ -41,13 +41,25 @@ jQuery( function( $ ) {
 	 */
 	function results( data ) {
 		$( this ).removeClass( 'working' );
-		$( 'ul#group-blog-result li:[checked=false]' ).remove();
+		var list = $( '#group-blog-result' );
+		list.find( '*:not( .group-blog-template ):has( input[ checked!="checked" ] )' ).remove();
 
 		for( var i = 0, l = data.length; i < l; i++ ) {
-			$( 'ul#group-blog-result' ).append( '<li><input id="group-blog-id-' + data[ i ].blog_id + '" name="group-blog-blogs[]" type="checkbox" value="' + data[ i ].blog_id + '" /><label for="group-blog-id-' + data[ i ].blog_id + '">' + data[ i ].domain + '</label></li>' );
+			if( list.find( '#group-blog-' + data[ i ].blog_id ).length == 0 ) {
+				var blog = list.find( '.group-blog-template' ).clone();
+				blog.removeClass( 'group-blog-template' );
+				blog.attr( 'id', 'group-blog-' + data[ i ].blog_id );
+
+				for( var ii in data[ i ] ) {
+					var re = RegExp( '%' + ii, 'g' );
+					blog.html( blog.html().replace( re, data[ i ][ ii ] ) );
+				}
+
+				list.append( blog );
+			}
 		}
 	}
 
-	$( 'input#group-blog-search' ).keydown( searchByTimeout );
+	$( '#group-blog-search' ).keydown( searchByTimeout );
 
 } );

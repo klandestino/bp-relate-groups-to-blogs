@@ -1,0 +1,12 @@
+#group-blog-result label {
+	display: inline;
+}
+
+#group-blog-result .group-blog-template {
+	display: none;
+}
+
+input#group-blog-search.working {
+	color: gray;
+	background: url('../../../../wp-admin/images/loading-publish.gif') right center no-repeat;
+}

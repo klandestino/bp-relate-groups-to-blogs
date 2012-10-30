@@ -7,8 +7,16 @@
 <input id="group-blog-search" type="text" name="group-blog-search" />
 
 <ul id="group-blog-result">
+	<li class="group-blog-template">
+		<input id="group-blog-id-%blog_id" name="group-blog-blogs[]" type="checkbox" value="%blog_id" />
+		<label for="group-blog-id-%blog_id">%blogname — <em>%blogdescription</em></label>
+		— <a href="%siteurl" title="%blogname"><?php _e( 'View blog', 'bp-relate-groups-to-blogs' ); ?></a>
+	</li>
 	<?php foreach( $bp_relate_groups_to_blogs->get_blogs() as $blog ) : ?>
-		<li><input id="group-blog-id-<?php echo esc_attr( $blog->id ); ?>" name="group-blog-blogs" value="<?php echo esc_attr( $blog->id ); ?>" checked="checked" /> <?php $blog->name; ?></li>
+		<li id="group-blog-<?php echo esc_attr( $blog->id ); ?>">
+			<input id="group-blog-id-<?php echo esc_attr( $blog->id ); ?>" name="group-blog-blogs[]" type="checkbox" value="<?php echo esc_attr( $blog->id ); ?>" checked="checked" />
+			<?php $blog->name; ?>
+		</li>
 	<?php endforeach; ?>
 </ul>
 

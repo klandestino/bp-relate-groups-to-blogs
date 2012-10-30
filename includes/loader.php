@@ -120,11 +120,12 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 class BP_Relate_Groups_to_Blogs_Ajax {
 
 	/**
-	 * Makes wordpress load scripts
+	 * Makes wordpress load scripts and styles
 	 * @return void
 	 */
 	public function enqueue_scripts() {
 		wp_enqueue_script( 'bp-relate-groups-to-blogs', BP_RELATE_GROUPS_TO_BLOGS_PLUGIN_URL . '/js/bp-relate-groups-to-blogs.js', array( 'jquery' ) );
+		wp_enqueue_style( 'bp-relate-groups-to-blogs', BP_RELATE_GROUPS_TO_BLOGS_PLUGIN_URL . '/css/bp-relate-groups-to-blogs.css' );
 	}
 
 	/**
@@ -134,21 +135,34 @@ class BP_Relate_Groups_to_Blogs_Ajax {
 	public function get_blogs( $query = '' ) {
 		global $wpdb;
 		$blogs = array();
+		$current_blog_id = $wpdb->blogid;
 
 		if( empty( $query ) && array_key_exists( 'query', $_POST ) ) {
 			$query = $_POST[ 'query' ];
 		}
 
-		$result = $wpdb->get_results( sprintf(
+		$query = $wpdb->get_results( sprintf(
 			'SELECT `blog_id`, `domain` FROM `%s` WHERE `domain` LIKE "%%%s%%" AND `public` = "1" AND `archived` = "0"',
 			mysql_real_escape_string( $wpdb->blogs ),
 			mysql_real_escape_string( $query )
-		) );
+		), ARRAY_A );
 
-		foreach( $result as $blog ) {
+		foreach( $query as $blog ) {
+			$wpdb->set_blog_id( $blog[ 'blog_id' ] );
+
+			$subquery = $wpdb->get_results( sprintf(
+				'SELECT `option_name`, `option_value` FROM `%s` WHERE `option_name` IN ( "siteurl", "blogname", "blogdescription" )',
+				mysql_real_escape_string( $wpdb->options )
+			), ARRAY_A );
+
+			foreach( $subquery as $opt ) {
+				$blog[ $opt[ 'option_name' ] ] = $opt[ 'option_value' ];
+			}
+
 			$blogs[] = $blog;
 		}
 
+		$wpdb->set_blog_id( $current_blog_id );
 		echo json_encode( $blogs );
 
 		// Exit when done and before wordpress or something else prints a zero.
