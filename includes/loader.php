@@ -254,9 +254,9 @@ class BP_Relate_Groups_to_Blogs_Ajax {
 
 		if( is_array( $query ) ) {
 			$query = $wpdb->get_results( sprintf(
-				'SELECT `blog_id`, `domain` FROM `%s` WHERE `blog_id` IN ( "%s" ) AND `public` = "1" AND `archived` = "0"',
+				'SELECT `blog_id`, `domain` FROM `%s` WHERE `blog_id` IN ( %s ) AND `public` = "1" AND `archived` = "0"',
 				mysql_real_escape_string( $wpdb->blogs ),
-				mysql_real_escape_string( implode( '","', $query ) )
+				mysql_real_escape_string( implode( ',', $query ) )
 			), ARRAY_A );
 		} elseif( ! empty( $query ) ) {
 			$query = $wpdb->get_results( sprintf(
