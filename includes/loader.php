@@ -14,14 +14,14 @@ if( ! defined( 'ABSPATH' ) ) {
 class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 
 	/**
-	 * Name of plugin
+	 * Name of extension
 	 */
-	public $name = 'Relate groups to blogs';
+	public $name = 'Blogs';
 
 	/**
 	 * Plugin slug
 	 */
-	public $slug = 'relate-groups-to-blogs';
+	public $slug = 'related-blogs';
 
 	/**
 	 * If this plugin is visible for non-group members
