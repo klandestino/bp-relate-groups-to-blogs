@@ -193,7 +193,12 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	public function edit_screen_save() {
 		global $bp;
 
-		if( array_key_exists( 'save', $_POST ) ) {
+		// edit_screen_save() is executed before edit_screen(). Don't know why,
+		// but we need to know if a form has been posted to this request.
+		// If $_POST[ 'save' ] exist, then we know a form has been posted. If
+		// not we'll return with false so the rest of the screen-rendering
+		// will work.
+		if( ! array_key_exists( 'save', $_POST ) ) {
 			return false;
 		}
 
