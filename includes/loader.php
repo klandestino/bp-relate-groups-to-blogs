@@ -106,7 +106,7 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 			$group_id = $bp->groups->current_group->id;
 		}
 
-		$blogs_id = groups_get_groupmeta( 'bp-relate-groups-to-blogs', $group_id );
+		$blogs_id = groups_get_groupmeta( $group_id, 'bp_relate_groups_to_blogs' );
 
 		if( ! empty( $blogs_id ) ) {
 			if( ! is_array( $blogs_id ) ) {
@@ -131,13 +131,13 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 		}
 
 		if( empty( $blogs_id ) ) {
-			groups_delete_groupmeta( $group_id, 'bp-relate-groups-to-blogs' );
+			groups_delete_groupmeta( $group_id, 'bp_relate_groups_to_blogs' );
 		} else {
 			if( ! is_array( $blogs_id ) ) {
 				$blogs_id = array( $blogs_id );
 			}
 
-			groups_update_groupmeta( $group_id, 'bp-relate-groups-to-blogs', $blogs_id );
+			groups_update_groupmeta( $group_id, 'bp_relate_groups_to_blogs', $blogs_id );
 		}
 	}
 
@@ -163,9 +163,9 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	public function create_screen_save() {
 		check_admin_referer( 'groups_create_save_' . $this->slug );
 
-		if( array_key_exists( 'group_blog_blogs', $_POST ) ) {
+		if( array_key_exists( 'group-blog-blogs', $_POST ) ) {
 			global $bp;
-			$this->set_blogs( $bp->groups->new_group_id, $_POST[ 'group_blog_blogs' ] );
+			$this->set_blogs( $bp->groups->new_group_id, $_POST[ 'group-blog-blogs' ] );
 		}
 	}
 
@@ -199,8 +199,8 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 
 		check_admin_referer( 'groups_edit_save_' . $this->slug );
 
-		if( array_key_exists( 'group_blog_blogs', $_POST ) ) {
-			$this->set_blogs( $bp->groups->current_group->id, $_POST[ 'group_blog_blogs' ] );
+		if( array_key_exists( 'group-blog-blogs', $_POST ) ) {
+			$this->set_blogs( $bp->groups->current_group->id, $_POST[ 'group-blog-blogs' ] );
 			bp_core_add_message( __( 'Group Blog Categories settings were successfully updated.', 'bcg' ) );
 		} else {
 			bp_core_add_message( __( 'There was an error updating Group Blog Categories settings, please try again.', 'bcg' ), 'error' );
@@ -241,7 +241,6 @@ class BP_Relate_Groups_to_Blogs_Ajax {
 	 */
 	static public function get_blogs( $query = '', $print_json = true ) {
 		global $wpdb;
-		$query = array();
 		$blogs = array();
 		$current_blog_id = $wpdb->blogid;
 
