@@ -1,7 +1,7 @@
 <?php global $bp_relate_groups_to_blogs; ?>
 <h2><?php echo esc_attr( __( $bp_relate_groups_to_blogs->name, 'bp-relate-groups-to-blogs' ) ); ?></h2>
 
-<p><?php _e( 'Some text...', 'bp-relate-groups-to-blogs' ); ?></p>
+<?php echo $bp_relate_groups_to_blogs->get_display_content(); ?>
 
 <ul id="group-blog-result">
 	<?php foreach( $bp_relate_groups_to_blogs->get_blogs() as $blog ) : ?>
