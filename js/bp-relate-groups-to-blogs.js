@@ -1,6 +1,11 @@
 jQuery( function( $ ) {
 
 	/**
+	 * Stores search result cache
+	 */
+	var cache = [];
+
+	/**
 	 * Executes a search by timeout
 	 * @returns void
 	 */
@@ -17,11 +22,19 @@ jQuery( function( $ ) {
 
 	/**
 	 * Executes an ajax search for blogs
+	 * @returns void
 	 */
 	function search() {
 		var e = $( this ), val = e.val().replace( /\s+/g, ' ' ).replace( /^\s|\s$/, '' );
 		if( e.data( 'search-last' ) != val && val.length > 0 ) {
 			e.data( 'search-last', val );
+
+			// Look for cached results with this query
+			if( typeof( cache[ val ] ) != 'undefined' ) {
+				results.apply( e, cache[ val ] );
+				return;
+			}
+
 			$.ajax( ajaxurl, {
 				type: 'POST',
 				data: {
@@ -38,8 +51,18 @@ jQuery( function( $ ) {
 
 	/**
 	 * Taking care of results
+	 * @param data array result data
+	 * @returns void
 	 */
 	function results( data ) {
+		// Don't allow more than 100 cached results
+		if( cache.length > 99 ) {
+			cache.shift();
+		}
+
+		// Add this search to cache array
+		cache[ $( this ).data( 'search-last' ) ] = Array( data );
+
 		$( this ).removeClass( 'working' );
 		var list = $( '#group-blog-result' );
 		list.find( '*:not( .group-blog-template ):has( input[ checked!="checked" ] )' ).remove();

@@ -1,7 +1,7 @@
 <?php global $bp_relate_groups_to_blogs; ?>
 <h2><?php echo esc_attr( __( $bp_relate_groups_to_blogs->name, 'bp-relate-groups-to-blogs' ) ); ?></h2>
 
-<p><?php _e( 'Related blogs will appear in a group-widget in selected blogs. And blogs will appear here on the grou page.', 'bp-relate-groups-to-blogs' ); ?></p>
+<p><?php _e( 'Related blogs will appear in a group-widget in selected blogs. And blogs will appear here on the group page.', 'bp-relate-groups-to-blogs' ); ?></p>
 
 <label for="group-blog-display-content"><?php _e( 'Group bloglist description', 'bp-relate-groups-to-blogs' ); ?></label>
 <textarea id="group-blog-display-content" name="group-blog-display-content"><?php echo $bp_relate_groups_to_blogs->get_display_content( null, true ); ?></textarea>
