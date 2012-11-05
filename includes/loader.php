@@ -17,6 +17,9 @@ require_once( dirname( __FILE__ ) . '/ajax.php' );
 // Load the widget class
 require_once( dirname( __FILE__ ) . '/widget.php' );
 
+// Load the admin class
+require_once( dirname( __FILE__ ) . '/admin.php' );
+
 // Load textdomain
 load_plugin_textdomain( BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN, false, dirname( plugin_basename( __FILE__ ) . '/languages' ) );
 
@@ -31,3 +34,8 @@ add_action( 'wp_ajax_get_blogs', array( BP_Relate_Groups_to_Blogs_Ajax, 'get_blo
 
 // Registers the widget
 add_action( 'widgets_init', create_function( '', 'register_widget( "BP_Relate_Groups_to_Blogs_Widget" );' ) );
+
+// If we're in the administration
+if( is_site_admin() ) {
+	add_action( 'network_admin_menu', array( BP_Relate_Groups_to_Blogs_Admin, 'admin_menu' ) );
+}
