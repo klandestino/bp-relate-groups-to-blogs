@@ -6,6 +6,14 @@
 
 		<table class="form-table">
 			<tbody>
+				<tr>
+					<th scope="row">
+						<label for="group-tab-enabled"><?php _e( 'Show related blogs in group tab', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
+					</th>
+					<td>
+						<input id="group-tab-enabled" name="group-tab-enabled" type="checkbox" <?php if ( $settings[ 'group-tab-enabled' ] ) echo 'checked="checked"'; ?> />
+					</td>
+				</tr>
 				<tr valign="top">
 					<th scope="row">
 						<label for="group-tab-title"><?php _e( 'Group page tab title', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>

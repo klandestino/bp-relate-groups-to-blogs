@@ -21,6 +21,16 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	public $settings = array();
 
 	/**
+	 * Current group id
+	 */
+	public $group_id = 0;
+
+	/**
+	 * All related blog ids
+	 */
+	public $blogs_id = array();
+
+	/**
 	 * If this plugin is visible for non-group members
 	 */
 	public $visible = true;
@@ -59,13 +69,27 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	 * The contructor
 	 */
 	function __construct() {
+		global $bp;
+
+		// Get current group
+		if( isset( $bp->groups->current_group ) ) {
+			$this->group_id = $bp->groups->current_group->id;
+		}
+
+		// Get group blogs
+		$this->blogs_id = groups_get_groupmeta( $this->group_id, 'bp_relate_groups_to_blogs' );
+
 		// Load settings
 		$this->settings = BP_Relate_Groups_to_Blogs_Admin::defaults( get_site_option( 'bp_relate_groups_to_blogs_settings', array() ) );
 
 		// Apply
 		$this->name = $this->settings[ 'group-tab-title' ];
 		$this->slug = __( $this->slug, BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN );
-		$this->enable_nav_item = $this->enable_nav_item();
+		$this->enable_nav_item = count( $this->blogs_id ) && $this->settings[ 'group-tab-enabled' ];
+
+		if( true && count( $this->blogs_id ) ) {
+			add_action( 'bp_group_header_meta', array( $this, 'display_header' ) );
+		}
 	}
 
 	/**
@@ -116,13 +140,15 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	 * @return array
 	 */
 	public function get_blogs( $group_id = 0 ) {
-		global $bp;
-
 		if( empty( $group_id ) ) {
-			$group_id = $bp->groups->current_group->id;
+			$group_id = $this->group_id;
 		}
 
-		$blogs_id = groups_get_groupmeta( $group_id, 'bp_relate_groups_to_blogs' );
+		if( $group_id == $this->group_id ) {
+			$blogs_id = $this->blogs_id;
+		} else {
+			$blogs_id = groups_get_groupmeta( $group_id, 'bp_relate_groups_to_blogs' );
+		}
 
 		if( ! empty( $blogs_id ) ) {
 			if( ! is_array( $blogs_id ) ) {
@@ -141,10 +167,10 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	 * @return void
 	 */
 	public function set_blogs( $group_id = 0, $blogs_id = 0 ) {
-		global $wpdb, $bp;
+		global $wpdb;
 
 		if( empty( $group_id ) ) {
-			$group_id = $bp->groups->current_group->id;
+			$group_id = $this->group_id;
 		}
 
 		$blogs_id = BP_Relate_Groups_to_Blogs::check_array_value( $blogs_id );
@@ -205,10 +231,8 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	 * @return content text filtered through get_content filter
 	 */
 	public function get_display_content( $group_id = 0, $raw = false ) {
-		global $bp;
-
 		if( empty( $group_id ) ) {
-			$group_id = $bp->groups->current_group->id;
+			$group_id = $this->group_id;
 		}
 
 		$content = groups_get_groupmeta( $group_id, 'bp_relate_groups_to_blogs_display_content' );
@@ -234,28 +258,10 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 		global $bp;
 
 		if( empty( $group_id ) ) {
-			$group_id = $bp->groups->current_group->id;
+			$group_id = $this->group_id;
 		}
 
 		groups_update_groupmeta( $group_id, 'bp_relate_groups_to_blogs_display_content', $content );
-	}
-
-	/**
-	 * Getter for $enable_nav_item. Says true if there's at least
-	 * one blog related to this group.
-	 * @param int $group_id optional, default is current group
-	 * @return void
-	 */
-	public function enable_nav_item( $group_id = 0 ) {
-		global $bp;
-
-		if( empty( $group_id ) ) {
-			$group_id = $bp->groups->current_group->id;
-		}
-
-		$blogs = groups_get_groupmeta( $group_id, 'bp_relate_groups_to_blogs' );
-
-		return ( ! empty( $blogs ) );
 	}
 
 	/**
@@ -325,13 +331,13 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 		check_admin_referer( 'groups_edit_save_' . $this->slug );
 
 		if( array_key_exists( 'group-blog-blogs', $_POST ) ) {
-			$this->set_blogs( $bp->groups->current_group->id, $_POST[ 'group-blog-blogs' ] );
+			$this->set_blogs( 0, $_POST[ 'group-blog-blogs' ] );
 		} else {
-			$this->set_blogs( $bp->groups->current_group->id, 0 );
+			$this->set_blogs( 0, 0 );
 		}
 
 		if( array_key_exists( 'group-blog-display-content', $_POST ) ) {
-			$this->set_display_content( $bp->groups->current_group->id, $_POST[ 'group-blog-display-content' ] );
+			$this->set_display_content( 0, $_POST[ 'group-blog-display-content' ] );
 		}
 
 		bp_core_add_message( __( 'Group blog settings were successfully updated.', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ) );
@@ -344,12 +350,21 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	}
 
 	/**
-	 * Displays the related blogs in this plugin tab
+	 * Displays the related blogs in group tab
 	 */
 	public function display() {
 		global $bp, $bp_relate_groups_to_blogs;
 		$bp_relate_groups_to_blogs = $this;
 		BP_Relate_Groups_to_Blogs::get_template( 'bp-relate-groups-to-blogs-display', $bp->groups->current_group->slug );
+	}
+
+	/**
+	 * Displays the related blogs in the group header
+	 */
+	public function display_header() {
+		global $bp, $bp_relate_groups_to_blogs;
+		$bp_relate_groups_to_blogs = $this;
+		BP_Relate_Groups_to_Blogs::get_template( 'bp-relate-groups-to-blogs-header', $bp->groups->current_group->slug );
 	}
 
 }

@@ -3,7 +3,7 @@
 
 <?php echo $bp_relate_groups_to_blogs->get_display_content(); ?>
 
-<ul id="group-blog-result">
+<ul id="group-blogs">
 	<?php foreach( $bp_relate_groups_to_blogs->get_blogs() as $blog ) : ?>
 		<li id="group-blog-<?php echo esc_attr( $blog[ 'blog_id' ] ); ?>">
 			<a
