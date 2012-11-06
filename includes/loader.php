@@ -21,7 +21,7 @@ require_once( dirname( __FILE__ ) . '/widget.php' );
 require_once( dirname( __FILE__ ) . '/admin.php' );
 
 // Load textdomain
-load_plugin_textdomain( BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN, false, dirname( plugin_basename( __FILE__ ) . '/languages' ) );
+load_plugin_textdomain( BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN, false, plugin_basename( BP_RELATE_GROUPS_TO_BLOGS_PLUGIN_DIR ) . "/languages/" );
 
 // Register group extension
 bp_register_group_extension( 'BP_Relate_Groups_to_Blogs' );
