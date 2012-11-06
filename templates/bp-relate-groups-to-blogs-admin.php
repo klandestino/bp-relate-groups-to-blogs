@@ -40,7 +40,7 @@
 				</tr>
 				<tr>
 					<th scope="row">
-						<label for="group-page-title"><?php _e( 'Group-blog relation page title', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
+						<label for="group-page-title"><?php _e( 'Group page title', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
 					</th>
 					<td>
 						<input id="group-page-title" name="group-page-title" type="text" value="<?php echo esc_attr( $settings[ 'group-page-title' ] ); ?>" />
@@ -48,7 +48,7 @@
 				</tr>
 				<tr>
 					<th scope="row">
-						<label for="group-page-desc"><?php _e( 'Group-blog relation page description', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
+						<label for="group-page-desc"><?php _e( 'Group page description', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
 					</th>
 					<td>
 						<textarea id="group-page-desc" name="group-page-desc"><?php echo $settings[ 'group-page-desc' ]; ?></textarea>

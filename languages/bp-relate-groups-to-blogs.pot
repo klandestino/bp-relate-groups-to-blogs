@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-06 14:30+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: includes/admin.php:16 templates/bp-relate-groups-to-blogs-admin.php:3
+msgid "Relate Groups to Blogs Settings"
+msgstr ""
+
+#: includes/admin.php:17
+msgid "Relate Groups to Blogs"
+msgstr ""
+
+#: includes/admin.php:32 includes/admin.php:33 includes/admin.php:35
+msgid "Blogs"
+msgstr ""
+
+#: includes/admin.php:87
+msgid "Settings updated."
+msgstr ""
+
+#: includes/group.php:310 templates/bp-relate-groups-to-blogs-admin.php:69
+msgid "Save"
+msgstr ""
+
+#: includes/group.php:343
+msgid "Group blog settings were successfully updated."
+msgstr ""
+
+#: includes/widget.php:15
+msgid "Related Groups Widget"
+msgstr ""
+
+#: includes/widget.php:71
+msgid "Related Groups"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-admin.php:11
+msgid "Show related blogs in group header"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-admin.php:19
+msgid "Group page header title"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-admin.php:27
+msgid "Show related blogs in group tab"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-admin.php:35
+msgid "Group page tab title"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-admin.php:43
+msgid "Group page title"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-admin.php:51
+msgid "Group page description"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-admin.php:59
+msgid "Allow groups to add their own description"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-edit.php:4
+msgid ""
+"Add blogs below by writing their names in the search field. The search "
+"result will be shown automatically in a list below."
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-edit.php:7
+msgid "Group bloglist description"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-edit.php:11
+msgid "Find blogs by name"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-edit.php:18
+#: templates/bp-relate-groups-to-blogs-edit.php:36
+msgid "View blog"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-widget-form.php:3
+msgid "Title:"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-widget-form.php:7
+msgid "Groups"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-widget-form.php:9
+msgid ""
+"Add or remove a blog-group relationship on the group administration pages"
+msgstr ""
