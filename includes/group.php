@@ -307,7 +307,7 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 		global $bp, $bp_relate_groups_to_blogs;
 		$bp_relate_groups_to_blogs = $this;
 		BP_Relate_Groups_to_Blogs::get_template( 'bp-relate-groups-to-blogs-edit', $bp->groups->current_group->slug );
-		?><p><input type="submit" value="<?php _e( 'Save changes', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ) ?>" id="save" name="save" /></p><?php
+		?><p><input type="submit" value="<?php _e( 'Save' ) ?>" id="save" name="save" /></p><?php
 		wp_nonce_field( 'groups_edit_save_' . $this->slug );
 	}
 

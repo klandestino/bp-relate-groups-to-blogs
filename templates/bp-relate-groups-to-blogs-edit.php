@@ -1,7 +1,7 @@
 <?php global $bp_relate_groups_to_blogs; ?>
 <h2><?php echo $bp_relate_groups_to_blogs->settings[ 'group-page-title' ]; ?></h2>
 
-<p><?php _e( 'Related blogs will appear in a group-widget in selected blogs. And blogs will appear here on the group page.', 'bp-relate-groups-to-blogs' ); ?></p>
+<p><?php _e( 'Add blogs below by writing their names in the search field. The search result will be shown automatically in a list below.', 'bp-relate-groups-to-blogs' ); ?></p>
 
 <?php if( $bp_relate_groups_to_blogs->settings[ 'group-page-desc-enabled' ] ): ?>
 	<label for="group-blog-display-content"><?php _e( 'Group bloglist description', 'bp-relate-groups-to-blogs' ); ?></label>

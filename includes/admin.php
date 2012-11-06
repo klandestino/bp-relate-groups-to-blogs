@@ -84,7 +84,7 @@ class BP_Relate_Groups_to_Blogs_Admin {
 		} elseif( array_key_exists( 'updated', $_GET ) ) {
 			add_action( 'network_admin_notices', create_function( '', sprintf(
 				'echo "<div class=\"updated\"><p>%s</p></div>";',
-				__( 'Settings updated', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN )
+				__( 'Settings updated.', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN )
 			) ) );
 		}
 	}
