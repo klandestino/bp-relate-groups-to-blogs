@@ -8,6 +8,22 @@
 			<tbody>
 				<tr>
 					<th scope="row">
+						<label for="group-header-enabled"><?php _e( 'Show related blogs in group header', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
+					</th>
+					<td>
+						<input id="group-header-enabled" name="group-header-enabled" type="checkbox" <?php if ( $settings[ 'group-header-enabled' ] ) echo 'checked="checked"'; ?> />
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">
+						<label for="group-header-title"><?php _e( 'Group page header title', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
+					</th>
+					<td>
+						<input id="group-header-title" name="group-header-title" type="text" value="<?php echo esc_attr( $settings[ 'group-header-title' ] ); ?>" />
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">
 						<label for="group-tab-enabled"><?php _e( 'Show related blogs in group tab', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
 					</th>
 					<td>

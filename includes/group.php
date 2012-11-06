@@ -87,7 +87,7 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 		$this->slug = __( $this->slug, BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN );
 		$this->enable_nav_item = count( $this->blogs_id ) && $this->settings[ 'group-tab-enabled' ];
 
-		if( true && count( $this->blogs_id ) ) {
+		if( count( $this->blogs_id ) && $this->settings[ 'group-header-enabled' ] ) {
 			add_action( 'bp_group_header_meta', array( $this, 'display_header' ) );
 		}
 	}

@@ -28,6 +28,8 @@ class BP_Relate_Groups_to_Blogs_Admin {
 	 */
 	public static function defaults( $settings ) {
 		$defaults = array(
+			'group-header-enabled' => true,
+			'group-header-title' => __( 'Blogs', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ),
 			'group-tab-title' => __( 'Blogs', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ),
 			'group-tab-enabled' => true,
 			'group-page-title' => __( 'Blogs', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ),
@@ -64,6 +66,10 @@ class BP_Relate_Groups_to_Blogs_Admin {
 		if( array_key_exists( 'group-save', $_POST ) ) {
 			check_admin_referer( 'bp_relate_groups_to_blogs_settings' );
 			$settings = BP_Relate_Groups_to_Blogs_Admin::defaults( $_POST );
+
+			if( ! array_key_exists( 'group-header-enabled', $_POST ) ) {
+				$settings[ 'group-header-enabled' ] = false;
+			}
 
 			if( ! array_key_exists( 'group-tab-enabled', $_POST ) ) {
 				$settings[ 'group-tab-enabled' ] = false;
