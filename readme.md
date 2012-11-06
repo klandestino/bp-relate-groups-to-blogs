@@ -37,8 +37,7 @@ in your network administration.
 Set where to show the blog-group relationships, titles and descriptions
 in the network admin settings pages.
 
-Overriding templates
---------------------
+### Overriding templates
 
 These templates are overridable:
 
