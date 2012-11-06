@@ -37,5 +37,6 @@ add_action( 'widgets_init', create_function( '', 'register_widget( "BP_Relate_Gr
 
 // If we're in the administration
 if( is_site_admin() ) {
+	add_action( 'admin_init', array( BP_Relate_Groups_to_Blogs_Admin, 'admin_page_save' ) );
 	add_action( 'network_admin_menu', array( BP_Relate_Groups_to_Blogs_Admin, 'admin_menu' ) );
 }

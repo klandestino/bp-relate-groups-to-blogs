@@ -16,6 +16,11 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	public $slug = 'related-blogs';
 
 	/**
+	 * Loaded settings from get_site_option
+	 */
+	public $settings = array();
+
+	/**
 	 * If this plugin is visible for non-group members
 	 */
 	public $visible = true;
@@ -54,7 +59,11 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	 * The contructor
 	 */
 	function __construct() {
-		$this->name = __( $this->name, BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN );
+		// Load settings
+		$this->settings = BP_Relate_Groups_to_Blogs_Admin::defaults( get_site_option( 'bp_relate_groups_to_blogs_settings', array() ) );
+
+		// Apply
+		$this->name = $this->settings[ 'group-tab-title' ];
 		$this->slug = __( $this->slug, BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN );
 		$this->enable_nav_item = $this->enable_nav_item();
 	}
@@ -201,11 +210,17 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 		if( empty( $group_id ) ) {
 			$group_id = $bp->groups->current_group->id;
 		}
+
+		$content = groups_get_groupmeta( $group_id, 'bp_relate_groups_to_blogs_display_content' );
+
+		if( ! $this->settings[ 'group-page-desc-enabled' ] || empty( $content ) ) {
+			$content = $this->settings[ 'group-page-desc' ];
+		}
 	
 		if( $raw ) {
-			return groups_get_groupmeta( $group_id, 'bp_relate_groups_to_blogs_display_content' );
+			return $content;
 		} else {
-			return apply_filters( 'get_content', groups_get_groupmeta( $group_id, 'bp_relate_groups_to_blogs_display_content' ) );
+			return apply_filters( 'get_content', $content );
 		}
 	}
 

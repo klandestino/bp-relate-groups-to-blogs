@@ -1,5 +1,5 @@
 <?php global $bp_relate_groups_to_blogs; ?>
-<h2><?php echo esc_attr( __( $bp_relate_groups_to_blogs->name, 'bp-relate-groups-to-blogs' ) ); ?></h2>
+<h2><?php echo $bp_relate_groups_to_blogs->settings[ 'group-page-title' ]; ?></h2>
 
 <?php echo $bp_relate_groups_to_blogs->get_display_content(); ?>
 
