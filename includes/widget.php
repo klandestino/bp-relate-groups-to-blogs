@@ -24,9 +24,16 @@ class BP_Relate_Groups_to_Blogs_Widget extends WP_Widget {
 	 * @return void
 	 */
 	public function widget( $args, $instance ) {
-		global $wpdb, $args, $instance, $groups;
+		global $wpdb, $before, $after, $title, $groups;
 		$args[ 'title' ] = apply_filters( 'widget_title', $instance[ 'title' ] );
 		$groups = BP_Relate_Groups_to_Blogs::check_array_value( get_option( 'bp_relate_groups_to_blogs', array() ) );
+
+		if ( ! empty( $args[ 'title' ] ) ) {
+			$title = $args[ 'before_title' ] . $args[ 'title' ] . $args[ 'after_title' ];
+		}
+
+		$before = $args[ 'before_widget' ];
+		$after = $args[ 'after_widget' ];
 
 		foreach( $groups as $i => $group ) {
 			$groups[ $i ] = groups_get_group( array( 'group_id' => $group ) );

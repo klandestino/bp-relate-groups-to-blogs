@@ -1,8 +1,12 @@
-<?php global $args, $instance; ?>
-<?php echo $args[ 'before_widget' ]; ?>
+<?php global $before, $after, $title, $groups; ?>
+<?php echo $before; ?>
 
-<?php if ( ! empty( $args[ 'title' ] ) ): ?>
-	<?php echo $args[ 'before_title' ] . $args[ 'title' ] . $args[ 'after_title' ]; ?>
-<?php endif; ?>
+<?php echo $title; ?>
 
-<?php echo $args[ 'after_widget' ]; ?>
+<ul>
+	<?php foreach( $groups as $group ): ?>
+		<li><a href="<?php echo esc_url( bp_get_group_permalink( $group ) ); ?>"><?php echo $group->name; ?></a></li>
+	<?php endforeach; ?>
+</ul>
+
+<?php echo $after; ?>
