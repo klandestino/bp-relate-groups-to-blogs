@@ -34,7 +34,8 @@ class BP_Relate_Groups_to_Blogs_Admin {
 			'group-tab-enabled' => true,
 			'group-page-title' => __( 'Blogs', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ),
 			'group-page-desc' => '',
-			'group-page-desc-enabled' => true
+			'group-page-desc-enabled' => true,
+			'group-widget-title' => __( 'Groups', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN )
 		);
 
 		if( is_array( $settings ) ) {

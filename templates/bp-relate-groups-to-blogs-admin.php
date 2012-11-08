@@ -62,6 +62,14 @@
 						<input id="group-page-desc-enabled" name="group-page-desc-enabled" type="checkbox" <?php if ( $settings[ 'group-page-desc-enabled' ] ) echo 'checked="checked"'; ?> />
 					</td>
 				</tr>
+				<tr>
+					<th scope="row">
+						<label for="group-widget-title"><?php _e( 'Blog widget default title', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
+					</th>
+					<td>
+						<input id="group-widget-title" name="group-widget-title" type="text" value="<?php echo esc_attr( $settings[ 'group-widget-title' ] ); ?>" />
+					</td>
+				</tr>
 			</tbody>
 		</table>
 

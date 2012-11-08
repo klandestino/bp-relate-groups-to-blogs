@@ -78,7 +78,8 @@ class BP_Relate_Groups_to_Blogs_Widget extends WP_Widget {
 		if ( isset( $instance[ 'title' ] ) ) {
 			$title = $instance[ 'title' ];
 		} else {
-			$title = __( 'Related Groups', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN );
+			$settings = BP_Relate_Groups_to_Blogs_Admin::defaults( get_option( 'bp_relate_groups_to_blogs_settings', array() ) );
+			$title = $settings[ 'group-widget-title' ];
 		}
 
 		BP_Relate_Groups_to_Blogs::get_template( 'bp-relate-groups-to-blogs-widget-form' );
