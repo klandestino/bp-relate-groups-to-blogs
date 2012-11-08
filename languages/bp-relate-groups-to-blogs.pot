@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-06 14:30+0100\n"
+"POT-Creation-Date: 2012-11-08 12:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,11 +29,15 @@ msgstr ""
 msgid "Blogs"
 msgstr ""
 
-#: includes/admin.php:87
+#: includes/admin.php:38 templates/bp-relate-groups-to-blogs-widget-form.php:7
+msgid "Groups"
+msgstr ""
+
+#: includes/admin.php:88
 msgid "Settings updated."
 msgstr ""
 
-#: includes/group.php:310 templates/bp-relate-groups-to-blogs-admin.php:69
+#: includes/group.php:310 templates/bp-relate-groups-to-blogs-admin.php:77
 msgid "Save"
 msgstr ""
 
@@ -43,10 +47,6 @@ msgstr ""
 
 #: includes/widget.php:15
 msgid "Related Groups Widget"
-msgstr ""
-
-#: includes/widget.php:71
-msgid "Related Groups"
 msgstr ""
 
 #: templates/bp-relate-groups-to-blogs-admin.php:11
@@ -77,6 +77,10 @@ msgstr ""
 msgid "Allow groups to add their own description"
 msgstr ""
 
+#: templates/bp-relate-groups-to-blogs-admin.php:67
+msgid "Blog widget default title"
+msgstr ""
+
 #: templates/bp-relate-groups-to-blogs-edit.php:4
 msgid ""
 "Add blogs below by writing their names in the search field. The search "
@@ -98,10 +102,6 @@ msgstr ""
 
 #: templates/bp-relate-groups-to-blogs-widget-form.php:3
 msgid "Title:"
-msgstr ""
-
-#: templates/bp-relate-groups-to-blogs-widget-form.php:7
-msgid "Groups"
 msgstr ""
 
 #: templates/bp-relate-groups-to-blogs-widget-form.php:9
