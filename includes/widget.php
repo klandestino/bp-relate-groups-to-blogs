@@ -17,7 +17,7 @@ class BP_Relate_Groups_to_Blogs_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Front-end widget display
+	 * Front-end widget display that display a list of related groups, but only if there are an.
 	 *
 	 * @param array $args Widget arguments
 	 * @param array $instance Widget instance
@@ -35,11 +35,14 @@ class BP_Relate_Groups_to_Blogs_Widget extends WP_Widget {
 		$before = $args[ 'before_widget' ];
 		$after = $args[ 'after_widget' ];
 
-		foreach( $groups as $i => $group ) {
-			$groups[ $i ] = groups_get_group( array( 'group_id' => $group ) );
-		}
+		// Only print widget if there's any groups defined
+		if( count( $groups ) ) {
+			foreach( $groups as $i => $group ) {
+				$groups[ $i ] = groups_get_group( array( 'group_id' => $group ) );
+			}
 
-		BP_Relate_Groups_to_Blogs::get_template( 'bp-relate-groups-to-blogs-widget' );
+			BP_Relate_Groups_to_Blogs::get_template( 'bp-relate-groups-to-blogs-widget' );
+		}
 	}
 
 	/**
