@@ -9,7 +9,7 @@
 <?php endif; ?>
 
 <label for="group-blog-search"><?php _e( 'Find blogs by name', 'bp-relate-groups-to-blogs' ); ?></label>
-<input id="group-blog-search" type="text" name="group-blog-search" />
+<input id="group-blog-search" type="text" name="group-blog-search" autocomplete="off" />
 
 <ul id="group-blog-result">
 	<li class="group-blog-template">
