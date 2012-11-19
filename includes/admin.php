@@ -36,6 +36,8 @@ class BP_Relate_Groups_to_Blogs_Admin {
 			'group-page-desc' => '',
 			'group-page-desc-enabled' => true,
 			'group-page-slogan-enabled' => true,
+			'group-edit-desc' => __( 'Add blogs below by writing their names in the search field. The search result will be shown automatically in a list below.', 'bp-relate-groups-to-blogs' ),
+			'group-edit-searchfield' => __( 'Find blogs by name', 'bp-relate-groups-to-blogs' ),
 			'group-widget-title' => __( 'Groups', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN )
 		);
 

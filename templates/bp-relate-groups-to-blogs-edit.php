@@ -1,14 +1,14 @@
 <?php global $bp_relate_groups_to_blogs; ?>
 <h2><?php echo $bp_relate_groups_to_blogs->settings[ 'group-page-title' ]; ?></h2>
 
-<p><?php _e( 'Add blogs below by writing their names in the search field. The search result will be shown automatically in a list below.', 'bp-relate-groups-to-blogs' ); ?></p>
+<?php echo $bp_relate_groups_to_blogs->get_edit_content(); ?>
 
 <?php if( $bp_relate_groups_to_blogs->settings[ 'group-page-desc-enabled' ] ): ?>
 	<label for="group-blog-display-content"><?php _e( 'Group bloglist description', 'bp-relate-groups-to-blogs' ); ?></label>
 	<textarea id="group-blog-display-content" name="group-blog-display-content"><?php echo $bp_relate_groups_to_blogs->get_display_content( null, true ); ?></textarea>
 <?php endif; ?>
 
-<label for="group-blog-search"><?php _e( 'Find blogs by name', 'bp-relate-groups-to-blogs' ); ?></label>
+<label for="group-blog-search"><?php echo esc_attr( $bp_relate_groups_to_blogs->settings[ 'group-edit-searchfield' ] ); ?></label>
 <input id="group-blog-search" type="text" name="group-blog-search" autocomplete="off" />
 
 <ul id="group-blog-result">

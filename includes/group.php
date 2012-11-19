@@ -228,7 +228,7 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 	 * Get display content
 	 * @param int $group_id optional, default is current group
 	 * @param boolean $raw optional, if true, content will be returned without any filtering
-	 * @return content text filtered through get_content filter
+	 * @return content text filtered through the_content filter
 	 */
 	public function get_display_content( $group_id = 0, $raw = false ) {
 		if( empty( $group_id ) ) {
@@ -244,7 +244,7 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 		if( $raw ) {
 			return $content;
 		} else {
-			return apply_filters( 'get_content', $content );
+			return apply_filters( 'the_content', $content );
 		}
 	}
 
@@ -262,6 +262,22 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 		}
 
 		groups_update_groupmeta( $group_id, 'bp_relate_groups_to_blogs_display_content', $content );
+	}
+
+	/**
+	 * Get edit content
+	 * @param int $group_id optional, default is current group
+	 * @param boolean $raw optional, if true, content will be returned without any filtering
+	 * @return content text filtered through the_content filter
+	 */
+	public function get_edit_content( $raw = false ) {
+		$content = $this->settings[ 'group-edit-desc' ];
+	
+		if( $raw ) {
+			return $content;
+		} else {
+			return apply_filters( 'the_content', $content );
+		}
 	}
 
 	/**

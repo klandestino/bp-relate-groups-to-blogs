@@ -64,6 +64,22 @@
 				</tr>
 				<tr>
 					<th scope="row">
+						<label for="group-edit-searchfield"><?php _e( 'Group edit page searchfield label', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
+					</th>
+					<td>
+						<input id="group-edit-searchfield" name="group-edit-searchfield" type="text" value="<?php echo esc_attr( $settings[ 'group-edit-searchfield' ] ); ?>" />
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">
+						<label for="group-edit-desc"><?php _e( 'Group edit page description', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
+					</th>
+					<td>
+						<textarea id="group-edit-desc" name="group-edit-desc"><?php echo $settings[ 'group-edit-desc' ]; ?></textarea>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">
 						<label for="group-page-slogan-enabled"><?php _e( 'Show blog slogan in blog list on group page', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
 					</th>
 					<td>
