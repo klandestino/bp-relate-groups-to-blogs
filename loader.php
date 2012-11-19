@@ -3,8 +3,8 @@
 Plugin Name: BuddyPress Relate Groups to Blogs
 Plugin URI: https://github.com/klandestino/bp-relate-groups-to-blogs
 Description: Makes it possible to relate groups to blogs.
-Version: 1.1.2
-Revision Date: 11 16, 2012
+Version: 1.2
+Revision Date: 11 19, 2012
 Requires at least: 3.4.2
 Tested up to: 3.4.2
 License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.html
@@ -18,7 +18,6 @@ define( 'BP_RELATE_GROUPS_TO_BLOGS_VERSION', '1.1.2' );
 define( 'BP_RELATE_GROUPS_TO_BLOGS_PLUGIN_DIR', dirname( $network_plugin ) );
 define( 'BP_RELATE_GROUPS_TO_BLOGS_PLUGIN_URL', plugin_dir_url( '' ) . basename( BP_RELATE_GROUPS_TO_BLOGS_PLUGIN_DIR ) );
 define( 'BP_RELATE_GROUPS_TO_BLOGS_TEMPLATE_DIR', dirname( __FILE__ ) . '/templates' );
-define( 'BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN', 'bp-relate-groups-to-blogs' );
 
 function bp_relate_groups_to_blogs_init() {
 	if( version_compare( BP_VERSION, '1.3', '>' ) ) {
