@@ -83,8 +83,8 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 		$this->settings = BP_Relate_Groups_to_Blogs_Admin::defaults( get_site_option( 'bp_relate_groups_to_blogs_settings', array() ) );
 
 		// Apply
-		$this->name = $this->settings[ 'group-tab-title' ];
-		$this->slug = __( $this->slug, BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN );
+		$this->name = esc_attr( $this->settings[ 'group-tab-title' ] );
+		$this->slug = __( 'related-blogs', 'bp-relate-groups-to-blogs' );
 		$this->enable_nav_item = count( $this->blogs_id ) && $this->settings[ 'group-tab-enabled' ];
 
 		if( count( $this->blogs_id ) && $this->settings[ 'group-header-enabled' ] ) {
@@ -356,7 +356,7 @@ class BP_Relate_Groups_to_Blogs extends BP_Group_Extension {
 			$this->set_display_content( 0, $_POST[ 'group-blog-display-content' ] );
 		}
 
-		bp_core_add_message( __( 'Group blog settings were successfully updated.', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ) );
+		bp_core_add_message( __( 'Settings were successfully updated.', 'bp-relate-groups-to-blogs' ) );
 
 		bp_core_redirect( sprintf(
 			'%s/admin/%s',

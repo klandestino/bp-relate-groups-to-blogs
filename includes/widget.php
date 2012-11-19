@@ -12,7 +12,7 @@ class BP_Relate_Groups_to_Blogs_Widget extends WP_Widget {
 		parent::__construct(
 			'bp_relate_groups_to_blogs_widget',
 			'Related Groups Widget',
-			array( 'description' => __( 'Related Groups Widget', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ), )
+			array( 'description' => __( 'Related Groups Widget', 'bp-relate-groups-to-blogs' ), )
 		 );
 	}
 

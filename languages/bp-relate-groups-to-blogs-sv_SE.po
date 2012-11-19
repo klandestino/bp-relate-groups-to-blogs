@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BP Relate Groups to Blogs 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-08 12:12+0100\n"
-"PO-Revision-Date: 2012-11-08 12:15+0100\n"
+"POT-Creation-Date: 2012-11-19 22:38+0100\n"
+"PO-Revision-Date: 2012-11-19 22:46+0100\n"
 "Last-Translator: spurge <olof@klandestino.se>\n"
 "Language-Team: Klandestino <olof@klandestino.se>\n"
 "Language: \n"
@@ -34,23 +34,35 @@ msgstr "Relatera grupper med bloggar"
 msgid "Blogs"
 msgstr "Bloggar"
 
-#: includes/admin.php:38
+#: includes/admin.php:39
+msgid "Add blogs below by writing their names in the search field. The search result will be shown automatically in a list below."
+msgstr "Lägg till bloggar genom att skriva in deras namn i sökfältet. Bloggarna visas då per automatik i ett sökresultat längre ner."
+
+#: includes/admin.php:40
+msgid "Find blogs by name"
+msgstr "Hitta bloggar efter namn"
+
+#: includes/admin.php:41
 #: templates/bp-relate-groups-to-blogs-widget-form.php:7
 msgid "Groups"
 msgstr "Grupper"
 
-#: includes/admin.php:88
+#: includes/admin.php:95
 msgid "Settings updated."
 msgstr "Inställningar uppdaterade."
 
-#: includes/group.php:310
-#: templates/bp-relate-groups-to-blogs-admin.php:77
+#: includes/group.php:87
+msgid "related-blogs"
+msgstr "relaterade-bloggar"
+
+#: includes/group.php:326
+#: templates/bp-relate-groups-to-blogs-admin.php:101
 msgid "Save"
 msgstr "Spara"
 
-#: includes/group.php:343
-msgid "Group blog settings were successfully updated."
-msgstr "Gruppbloggsinställningarna uppdaterades."
+#: includes/group.php:359
+msgid "Settings were successfully updated."
+msgstr "Inställningarna uppdaterades."
 
 #: includes/widget.php:15
 msgid "Related Groups Widget"
@@ -85,23 +97,27 @@ msgid "Allow groups to add their own description"
 msgstr "Tillåt grupper att skriva egna beskrivningar"
 
 #: templates/bp-relate-groups-to-blogs-admin.php:67
+msgid "Group edit page searchfield label"
+msgstr "Gruppens inställningssidas sökfältsnamn"
+
+#: templates/bp-relate-groups-to-blogs-admin.php:75
+msgid "Group edit page description"
+msgstr "Gruppens inställningsidas beskrivning"
+
+#: templates/bp-relate-groups-to-blogs-admin.php:83
+msgid "Show blog slogan in blog list on group page"
+msgstr "Visa bloggbeskrivning i listan över bloggar på gruppsidan"
+
+#: templates/bp-relate-groups-to-blogs-admin.php:91
 msgid "Blog widget default title"
 msgstr "Bloggwidgetens förvalda titel"
-
-#: templates/bp-relate-groups-to-blogs-edit.php:4
-msgid "Add blogs below by writing their names in the search field. The search result will be shown automatically in a list below."
-msgstr "Lägg till bloggar genom att skriva in deras namn i sökfältet. Bloggarna visas då per automatik i ett sökresultat längre ner."
 
 #: templates/bp-relate-groups-to-blogs-edit.php:7
 msgid "Group bloglist description"
 msgstr "Beskrivning av gruppens bloggar"
 
-#: templates/bp-relate-groups-to-blogs-edit.php:11
-msgid "Find blogs by name"
-msgstr "Hitta bloggar efter namn"
-
-#: templates/bp-relate-groups-to-blogs-edit.php:18
-#: templates/bp-relate-groups-to-blogs-edit.php:36
+#: templates/bp-relate-groups-to-blogs-edit.php:23
+#: templates/bp-relate-groups-to-blogs-edit.php:43
 msgid "View blog"
 msgstr "Visa blogg"
 

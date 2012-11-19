@@ -4,9 +4,9 @@
 	<input class="widefat" id="<?php echo $title_id ?>" name="<?php echo $title_name ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 </p>
 
-<h4><?php _e( 'Groups', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></h4>
+<h4><?php _e( 'Groups', 'bp-relate-groups-to-blogs' ); ?></h4>
 
-<p><?php _e( 'Add or remove a blog-group relationship on the group administration pages', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></p>
+<p><?php _e( 'Add or remove a blog-group relationship on the group administration pages', 'bp-relate-groups-to-blogs' ); ?></p>
 
 <ul>
 	<?php foreach( $groups as $group ): ?>

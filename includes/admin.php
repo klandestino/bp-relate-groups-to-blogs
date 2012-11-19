@@ -13,8 +13,8 @@ class BP_Relate_Groups_to_Blogs_Admin {
 	public static function admin_menu() {
 		add_submenu_page(
 			'settings.php',
-			__( 'Relate Groups to Blogs Settings', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ),
-			__( 'Relate Groups to Blogs', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ),
+			__( 'Relate Groups to Blogs Settings', 'bp-relate-groups-to-blogs' ),
+			__( 'Relate Groups to Blogs', 'bp-relate-groups-to-blogs' ),
 			'manage_options',
 			'relate-groups-to-blogs',
 			array( BP_Relate_Groups_to_Blogs_Admin, 'admin_page' )
@@ -29,16 +29,16 @@ class BP_Relate_Groups_to_Blogs_Admin {
 	public static function defaults( $settings ) {
 		$defaults = array(
 			'group-header-enabled' => true,
-			'group-header-title' => __( 'Blogs', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ),
-			'group-tab-title' => __( 'Blogs', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ),
+			'group-header-title' => __( 'Blogs', 'bp-relate-groups-to-blogs' ),
+			'group-tab-title' => __( 'Blogs', 'bp-relate-groups-to-blogs' ),
 			'group-tab-enabled' => true,
-			'group-page-title' => __( 'Blogs', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ),
+			'group-page-title' => __( 'Blogs', 'bp-relate-groups-to-blogs' ),
 			'group-page-desc' => '',
 			'group-page-desc-enabled' => true,
 			'group-page-slogan-enabled' => true,
 			'group-edit-desc' => __( 'Add blogs below by writing their names in the search field. The search result will be shown automatically in a list below.', 'bp-relate-groups-to-blogs' ),
 			'group-edit-searchfield' => __( 'Find blogs by name', 'bp-relate-groups-to-blogs' ),
-			'group-widget-title' => __( 'Groups', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN )
+			'group-widget-title' => __( 'Groups', 'bp-relate-groups-to-blogs' )
 		);
 
 		if( is_array( $settings ) ) {
@@ -92,7 +92,7 @@ class BP_Relate_Groups_to_Blogs_Admin {
 		} elseif( array_key_exists( 'updated', $_GET ) ) {
 			add_action( 'network_admin_notices', create_function( '', sprintf(
 				'echo "<div class=\"updated\"><p>%s</p></div>";',
-				__( 'Settings updated.', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN )
+				__( 'Settings updated.', 'bp-relate-groups-to-blogs' )
 			) ) );
 		}
 	}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-08 12:12+0100\n"
+"POT-Creation-Date: 2012-11-19 22:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,20 +29,34 @@ msgstr ""
 msgid "Blogs"
 msgstr ""
 
-#: includes/admin.php:38 templates/bp-relate-groups-to-blogs-widget-form.php:7
+#: includes/admin.php:39
+msgid ""
+"Add blogs below by writing their names in the search field. The search "
+"result will be shown automatically in a list below."
+msgstr ""
+
+#: includes/admin.php:40
+msgid "Find blogs by name"
+msgstr ""
+
+#: includes/admin.php:41 templates/bp-relate-groups-to-blogs-widget-form.php:7
 msgid "Groups"
 msgstr ""
 
-#: includes/admin.php:88
+#: includes/admin.php:95
 msgid "Settings updated."
 msgstr ""
 
-#: includes/group.php:310 templates/bp-relate-groups-to-blogs-admin.php:77
+#: includes/group.php:87
+msgid "related-blogs"
+msgstr ""
+
+#: includes/group.php:326 templates/bp-relate-groups-to-blogs-admin.php:101
 msgid "Save"
 msgstr ""
 
-#: includes/group.php:343
-msgid "Group blog settings were successfully updated."
+#: includes/group.php:359
+msgid "Settings were successfully updated."
 msgstr ""
 
 #: includes/widget.php:15
@@ -78,25 +92,27 @@ msgid "Allow groups to add their own description"
 msgstr ""
 
 #: templates/bp-relate-groups-to-blogs-admin.php:67
-msgid "Blog widget default title"
+msgid "Group edit page searchfield label"
 msgstr ""
 
-#: templates/bp-relate-groups-to-blogs-edit.php:4
-msgid ""
-"Add blogs below by writing their names in the search field. The search "
-"result will be shown automatically in a list below."
+#: templates/bp-relate-groups-to-blogs-admin.php:75
+msgid "Group edit page description"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-admin.php:83
+msgid "Show blog slogan in blog list on group page"
+msgstr ""
+
+#: templates/bp-relate-groups-to-blogs-admin.php:91
+msgid "Blog widget default title"
 msgstr ""
 
 #: templates/bp-relate-groups-to-blogs-edit.php:7
 msgid "Group bloglist description"
 msgstr ""
 
-#: templates/bp-relate-groups-to-blogs-edit.php:11
-msgid "Find blogs by name"
-msgstr ""
-
-#: templates/bp-relate-groups-to-blogs-edit.php:18
-#: templates/bp-relate-groups-to-blogs-edit.php:36
+#: templates/bp-relate-groups-to-blogs-edit.php:23
+#: templates/bp-relate-groups-to-blogs-edit.php:43
 msgid "View blog"
 msgstr ""
 
