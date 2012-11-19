@@ -10,7 +10,9 @@
 				href="<?php echo esc_attr( $blog[ 'siteurl' ] ); ?>"
 				title="<?php echo esc_attr( $blog[ 'blogname' ] ); ?>"
 			><?php echo esc_attr( $blog[ 'blogname' ] ); ?></a>
-			— <em><?php echo esc_attr( $blog[ 'blogdescription' ] ); ?></em>
+			<?php if( $bp_relate_groups_to_blogs->settings[ 'group-page-slogan-enable' ] ) :?>
+				— <em><?php echo esc_attr( $blog[ 'blogdescription' ] ); ?></em>
+			<?php endif; ?>
 		</li>
 	<?php endforeach; ?>
 </ul>

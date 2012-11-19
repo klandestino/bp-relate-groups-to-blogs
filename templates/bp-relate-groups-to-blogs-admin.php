@@ -64,6 +64,14 @@
 				</tr>
 				<tr>
 					<th scope="row">
+						<label for="group-page-slogan-enabled"><?php _e( 'Show blog slogan in blog list on group page', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
+					</th>
+					<td>
+						<input id="group-page-slogan-enabled" name="group-page-slogan-enabled" type="checkbox" <?php if ( $settings[ 'group-page-slogan-enabled' ] ) echo 'checked="checked"'; ?> />
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">
 						<label for="group-widget-title"><?php _e( 'Blog widget default title', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ); ?></label>
 					</th>
 					<td>

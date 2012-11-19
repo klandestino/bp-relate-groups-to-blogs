@@ -35,6 +35,7 @@ class BP_Relate_Groups_to_Blogs_Admin {
 			'group-page-title' => __( 'Blogs', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN ),
 			'group-page-desc' => '',
 			'group-page-desc-enabled' => true,
+			'group-page-slogan-enabled' => true,
 			'group-widget-title' => __( 'Groups', BP_RELATE_GROUPS_TO_BLOGS_TEXTDOMAIN )
 		);
 
@@ -78,6 +79,10 @@ class BP_Relate_Groups_to_Blogs_Admin {
 
 			if( ! array_key_exists( 'group-page-desc-enabled', $_POST ) ) {
 				$settings[ 'group-page-desc-enabled' ] = false;
+			}
+
+			if( ! array_key_exists( 'group-page-desc-enabled', $_POST ) ) {
+				$settings[ 'group-page-slogan-enabled' ] = false;
 			}
 
 			update_site_option( 'bp_relate_groups_to_blogs_settings', $settings );
