@@ -47,22 +47,24 @@ class BP_Relate_Groups_to_Blogs_Ajax {
 			), ARRAY_A );
 		}
 
-		foreach( $query as $blog ) {
-			$wpdb->set_blog_id( $blog[ 'blog_id' ] );
+		if( is_array( $query ) && ! empty( $query ) ) {
+			foreach( $query as $blog ) {
+				$wpdb->set_blog_id( $blog[ 'blog_id' ] );
 
-			$subquery = $wpdb->get_results( sprintf(
-				'SELECT `option_name`, `option_value` FROM `%s` WHERE `option_name` IN ( "siteurl", "blogname", "blogdescription" )',
-				mysql_real_escape_string( $wpdb->options )
-			), ARRAY_A );
+				$subquery = $wpdb->get_results( sprintf(
+					'SELECT `option_name`, `option_value` FROM `%s` WHERE `option_name` IN ( "siteurl", "blogname", "blogdescription" )',
+					mysql_real_escape_string( $wpdb->options )
+				), ARRAY_A );
 
-			foreach( $subquery as $opt ) {
-				$blog[ $opt[ 'option_name' ] ] = esc_attr( $opt[ 'option_value' ] );
+				foreach( $subquery as $opt ) {
+					$blog[ $opt[ 'option_name' ] ] = esc_attr( $opt[ 'option_value' ] );
+				}
+
+				$blogs[] = $blog;
 			}
 
-			$blogs[] = $blog;
+			$wpdb->set_blog_id( $current_blog_id );
 		}
-
-		$wpdb->set_blog_id( $current_blog_id );
 
 		if( $print_json ) {
 			echo json_encode( $blogs );
