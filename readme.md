@@ -5,7 +5,7 @@ Relate Groups to Blogs
 * Tags: buddypress, groups, blogs
 * Requires at least: WordPress 3.4.2, BuddyPress 1.6.1
 * Tested up to: WordPress 3.4.2 / BuddyPress 1.6.1
-* Stable tag: 1.2
+* Stable tag: 1.2.1
 
 Makes it possible to relate groups to blogs and define the relationships
 to whatever you want.
@@ -52,6 +52,10 @@ These templates are overridable:
 
 Changelog
 ---------
+
+### v1.2.1
+
+* Removed annoying warning when requesting an empty blog list.
 
 ### v1.2
 
